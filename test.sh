@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir -p tests/
 
 for (( i=1; i <= 40 ; i++  ))
