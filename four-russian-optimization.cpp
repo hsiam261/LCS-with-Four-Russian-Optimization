@@ -1,3 +1,37 @@
+/**
+ *
+ * MIT License
+ *
+ * Copyright c)( [year] [fullname]
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files the (Software""), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.))
+ * 
+ * author: Siam Habib <hsiam261@gmail.com>
+ *
+ *
+ * Four Russian Optimization to find the LCS of two strings
+ * usage: ./four-russian-optimization.out 
+ * enter the two strings in two lines (string can not have any white spaces between them)
+ *
+ */ 
+
+
 #include <iostream>
 #include <string>
 #include <utility>
@@ -8,6 +42,11 @@
 using namespace std;
 
 // block_size of the four russian algorithm
+// precompute memory requirement = 
+// (|ALPHABET|+1)^(2*block_size)*4^block_size*size_of(pre_compute_dp_block)
+// for block_size=4 and alphabet size = 4 (one byte characters) and using pair of 
+// integers as index rep size
+// 9.6 GiB
 const int block_size = 3;
 
 
@@ -50,7 +89,7 @@ namespace Precompute {
 	
 
 	/**
-	 * generates all the strings of length block_szie 
+	 * generates all the strings of length block_size 
 	 * with the with the alphabet symbols that can only have
 	 * trailing sentinal characters
 	 */
@@ -65,8 +104,12 @@ namespace Precompute {
 	}
 
 
+	// store indecies using bitwise will speed this up 
+	// Most optimal size of INDEX_REP_SIZE = floor(lg(block_size*2+1))+1
 	/**
-	 * Datasstructure to store the dp values of a block
+	 * datastructure to store the dp values of a block
+	 * worst case Memory Complexity: 
+	 * 2*block_size*(WORD_SIZE+2*INDEX_REP_SIZE) + 2*WORD_SIZE
 	 */ 
 	struct pre_compute_dp_block{	
 		/**
