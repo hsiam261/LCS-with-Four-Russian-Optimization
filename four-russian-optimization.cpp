@@ -25,7 +25,7 @@
  * author: Siam Habib <hsiam261@gmail.com>
  *
  *
- * Four Russian Optimization to find the LCS of two strings
+ * Four Russian Optimization to find a LCS between two strings
  * usage: ./four-russian-optimization.out 
  * enter the two strings in two lines (string can not have any white spaces between them)
  *
